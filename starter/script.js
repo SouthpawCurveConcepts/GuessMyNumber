@@ -15,6 +15,12 @@ let highscore = 0;
 
 console.log(typeof secretNumber, ', secretNumber: ' + secretNumber);
 
+//TODO: extra credit for Lesson 78:
+
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
@@ -33,7 +39,7 @@ document.querySelector('.check').addEventListener('click', function () {
 
   // No guess entered
   if (!guess) {
-    document.querySelector('.message').textContent = 'No number!';
+    displayMessage('No number!'); // Our sample function
     score--;
     document.querySelector('.score').textContent = score;
     console.log(typeof guess, guess, 'not', 'score', score);
