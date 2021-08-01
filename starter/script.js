@@ -15,64 +15,124 @@ let highscore = 0;
 
 console.log(typeof secretNumber, ', secretNumber: ' + secretNumber);
 
-//TODO: extra credit for Lesson 78:
+//Todo: extra credit for Lesson 78: Finish this tonight.  It's easy!
+const getSecretNumber = function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+};
 
 const displayMessage = function (message) {
   document.querySelector('.message').textContent = message;
 };
 
-document.querySelector('.again').addEventListener('click', function () {
-  score = 20;
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
-  console.log(typeof secretNumber, ', secretNumber: ' + secretNumber);
-  document.querySelector('.message').textContent = 'Start guessing...';
+const showScore = function (score) {
   document.querySelector('.score').textContent = score;
+};
+
+const showNumber = function () {
   document.querySelector('.number').textContent = '?';
+};
+
+const resetGuess = function () {
   document.querySelector('.guess').value = '';
+};
+
+const setBackgroundPlay = function () {
   document.querySelector('body').style.backgroundColor = '#222';
+};
+
+const setNumberPlayWidth = function () {
   document.querySelector('.number').style.width = '15rem';
+};
+
+const noGuessText = function () {
+  document.querySelector('.guess').textContent = '';
+};
+
+const showSecretNumber = function () {
+  document.querySelector('.number').textContent = secretNumber;
+};
+
+const resetScore = function () {
+  score = 20;
+};
+
+const decreaseScore = function () {
+  score--;
+};
+
+const showHighScore = function () {
+  document.querySelector('.highscore').textContent = highscore;
+};
+
+const setBackgroundWin = function () {
+  document.querySelector('body').style.backgroundColor = '#60b347';
+};
+
+const setNumberWinWidth = function () {
+  document.querySelector('.number').style.width = '30rem';
+};
+
+const setHighScore = function () {
+  highscore = score;
+};
+
+// Todo: Bottom of todo block
+
+document.querySelector('.again').addEventListener('click', function () {
+  resetScore();
+  getSecretNumber();
+  displayMessage('Start guessing...');
+  showScore(score);
+  showNumber();
+  resetGuess();
+  setBackgroundPlay();
+  setNumberPlayWidth();
+
+  console.log(typeof secretNumber, ', secretNumber: ' + secretNumber);
 });
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
+
   console.log(typeof guess, ', ' + guess, 'click');
 
   // No guess entered
   if (!guess) {
     displayMessage('No number!'); // Our sample function
-    score--;
-    document.querySelector('.score').textContent = score;
+    decreaseScore();
+    showScore(score);
+    noGuessText();
+
     console.log(typeof guess, guess, 'not', 'score', score);
-    document.querySelector('.guess').textContent = '';
 
     // Guess is correct
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'Correct Number!';
-    document.querySelector('.number').textContent = secretNumber;
-    document.querySelector('.score').textContent = score;
-    document.querySelector('body').style.backgroundColor = '#60b347';
-    document.querySelector('.number').style.width = '30rem';
+    displayMessage('Correct Number!');
+    showSecretNumber();
+    showScore(score);
+    setBackgroundWin();
+    setNumberWinWidth();
 
     console.log(typeof guess, guess, 'correct', 'score', score);
 
     if (score > highscore) {
-      highscore = score;
-      document.querySelector('.highscore').textContent = highscore;
+      setHighScore();
+      showHighScore();
     }
 
     // Guess is wrong
   } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent =
-        guess > secretNumber ? 'Too High!' : 'To low!';
-      score--;
-      document.querySelector('.score').textContent = score;
+      displayMessage(guess > secretNumber ? 'Too High!' : 'To low!');
+      decreaseScore();
+      showScore(score);
+
       console.log(typeof guess, guess, 'high', 'score', score);
 
       // Player loses game
     } else {
-      document.querySelector('.message').textContent = 'You lost the game!';
-      document.querySelector('.score').textContent = 0;
+      displayMessage('You lost the game!');
+      showScore(0);
     }
   }
 });
