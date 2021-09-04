@@ -15,6 +15,7 @@ let highscore = 0;
 
 console.log(typeof secretNumber, ", secretNumber: " + secretNumber);
 // Git hub practice try to push to main
+// Update this message
 //Todo: extra credit for Lesson 78: Finish this tonight.  It's easy!
 const getSecretNumber = function () {
   secretNumber = Math.trunc(Math.random() * 20) + 1;
