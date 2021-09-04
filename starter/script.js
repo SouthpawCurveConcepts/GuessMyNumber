@@ -13,6 +13,15 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
 
+console.log(typeof secretNumber, ', secretNumber: ' + secretNumber);
+// Git hub practice
+//Todo: extra credit for Lesson 78: Finish this tonight.  It's easy!
+const getSecretNumber = function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+};
+
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
 };
 
 const showScore = function (score) {
